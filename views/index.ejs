@@ -1,11 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+</head>
+
+<body>
+  <div class="ui container">
+    <br>
+
+    <div class="ui two column centered grid">
+      <div class="column">
+        <div class="ui fluid action input">
+          <input type="text" placeholder="Search..." id="searchbox" value="<%= typeof query != 'undefined' ? query.q : ''%>">
+          <button class="ui button" onclick="search()">Search</button>
+        </div>
+        <div class="column">
+          <br>
+          <% if(typeof query != 'undefined' && query.q != "") { %>
+            You have searched for <b><%=query.q%></b>, Showing <b><%=response.totalResults%></b> results
+          <% } %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="ui four cards">
+      <% response.articles.forEach(function(article){ %>
+      <div class="card">
+        <div class="image">
+          <img src="<%=article.urlToImage%>">
+        </div>
+        <div class="content">
+          <a href="<%=article.url%>" class="header"><%=article.title%></a>
+          <div class="meta">
+            <a><%=moment(article.publishedAt).tz('Asia/Kolkata').fromNow()%></a>
+          </div>
+          <div class="description"><%=article.description%></div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</body>
+
+<script>
+  console.log(<%-JSON.stringify(response)%>);
+
+  function search(){
+    var searchString = $("#searchbox").val();
+    var url = `/?q=${searchString}`;
+    location.href = url;
+  }
+</script>
+
 </html>
