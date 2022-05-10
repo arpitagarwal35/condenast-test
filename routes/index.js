@@ -21,6 +21,16 @@ router.get('/', function (req, res, next) {
       locals.title = 'World Wide latest news';
       locals.response = response;
       res.render('index', locals);
+    }).catch(err => {
+      var locals = {
+        message: err.message || "",
+        error: {
+          stack: err.stack,
+          status: err.name || err.code || ""
+        }
+      };
+      res.status(500);
+      res.render('error', locals);
     });
   } else {
     newsapi.v2.everything({
@@ -37,6 +47,16 @@ router.get('/', function (req, res, next) {
       locals.response = response;
       locals.query = req.query || {};
       res.render('index', locals);
+    }).catch(err => {
+      var locals = {
+        message: err.message || "",
+        error: {
+          stack: err.stack,
+          status: err.name || err.code || ""
+        }
+      };
+      res.status(500);
+      res.render('error', locals);
     });
   }
 });

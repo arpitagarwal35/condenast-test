@@ -29,21 +29,30 @@
         </div>
       </div>
     </div>
+
+    <% if(response.articles.length == 0){ %>
+      <div class="ui two column centered grid">
+        <div class="center aligned column">
+          <i class="huge frown outline icon"></i><br>
+          Sorry, We couldn’t find any results <br> Try something else
+        </div>
+      </div>
+    <% } %>
     
     <div class="ui four cards">
       <% response.articles.forEach(function(article){ %>
-      <div class="card">
-        <div class="image">
-          <img src="<%=article.urlToImage%>">
-        </div>
-        <div class="content">
-          <a href="<%=article.url%>" class="header"><%=article.title%></a>
-          <div class="meta">
-            <a><%=moment(article.publishedAt).tz('Asia/Kolkata').fromNow()%></a>
+        <div class="card">
+          <div class="image">
+            <img src="<%=article.urlToImage%>">
           </div>
-          <div class="description"><%=article.description%></div>
+          <div class="content">
+            <a href="<%=article.url%>" class="header"><%=article.title%></a>
+            <div class="meta">
+              <a><%=moment(article.publishedAt).tz('Asia/Kolkata').fromNow()%></a>
+            </div>
+            <div class="description"><%=article.description%></div>
+          </div>
         </div>
-      </div>
       <% }); %>
     </div>
   </div>
