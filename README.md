@@ -18,8 +18,8 @@ This app is using [newsapi.org](https://newsapi.org) for feching the news world 
 ### Setup App for run
 - Clone Project Repo
   ```
-  git clone https://github.com/arpitagarwal35/condenast-test.git
-  cd condenast-test
+  git clone https://github.com/arpitagarwal35/news-app.git
+  cd news-app
   ```
 - Install node package dependences
   ```
