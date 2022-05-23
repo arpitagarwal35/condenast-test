@@ -1,5 +1,3 @@
-# Condenast-test
-
 It is a simple web based application which is build using below tech stack:
 - Node.js
 - Express.js
